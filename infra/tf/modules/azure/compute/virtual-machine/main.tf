@@ -87,6 +87,8 @@ resource "azurerm_virtual_machine" "main" {
 curl -sq https://github.com/${var.github_user}.keys | tee -a /home/${var.system_user}/.ssh/authorized_keys
 # Base package installation
 sudo apt-get -y install apt-transport-https ca-certificates curl gnupg2 software-properties-common
+## Add azure cli installation
+curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
 ## Add Kubernetes repo
 curl -fsSL https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
 echo "deb https://apt.kubernetes.io/ kubernetes-xenial main" >/etc/apt/sources.list.d/kubernetes.list
