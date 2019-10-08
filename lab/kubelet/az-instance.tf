@@ -23,7 +23,7 @@ module "vm" {
   source              = "../../infra/tf/modules/azure/compute/virtual-machine"
   resource_group      = "${azurerm_resource_group.kubelet}"
   network             = "${module.net.network_id}"
-  subnet              = "${module.net.subnet_id}"
+  subnet              = "${module.net.compute_subnet_id}"
   name                = "kubelet"
   vm_size             = "Standard_F8s_v2"
   system_user         = "rael"

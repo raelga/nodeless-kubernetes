@@ -10,11 +10,11 @@ variable "name" {
 variable "address_space" {
   description = "Network Address Space"
   type        = "list"
-  default     = ["10.0.0.0/16"]
+  default     = ["10.0.0.0/8"]
 }
 
-variable "subnet" {
+variable "compute_subnet" {
   description = "Subnet a CIDR"
   type        = "string"
-  default     = "10.0.1.0/24"
+  default     = "10.1.0.0/16"
 }
