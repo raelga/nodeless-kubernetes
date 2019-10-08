@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: aws-auth
+  namespace: kube-system
+data:
+  mapRoles: |
+    - rolearn: arn:aws:iam::781416470409:role/tf-virtual-kubelet-role
+      username: system:virtual-kubelet
+      groups:
+        # These groups are what a usual EC2 needs
+        # to register to the API as a worker node, but
+        # seems not enough in the case of virtual-kubelet
+        # - system:bootstrappers
+        # - system:nodes
+
+        # TODO: find out which exact set of permissions does
+        # virtual-kubelet require
+        - system:masters
