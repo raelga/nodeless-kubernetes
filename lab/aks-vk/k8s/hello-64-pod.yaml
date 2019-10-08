@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: hello-64
+spec:
+  containers:
+    - name: hello
+      image: raelga/hello
+      resources:
+        limits:
+          cpu: 50m
+          memory: 64M
+        requests:
+          cpu: 50m
+          memory: 64M
+  tolerations:
+    - key: "virtual-kubelet.io/provider"
+      operator: "Equal"
+      value: "azure"
+      effect: "NoSchedule"
