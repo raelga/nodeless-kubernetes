@@ -103,8 +103,9 @@ sudo apt-get -y update
 sudo apt-get -y install docker-ce=5:18.09.9~3-0~ubuntu-bionic git kubectl golang
 ## Add ${var.system_user} to Docker group
 sudo usermod -aG docker ${var.system_user}
-## Setup Golang Path
-echo -e 'export GOROOT=/usr/lib/go-1.12\nexport PATH=$PATH:$GOROOT/bin' > /etc/profile.d/golang-1.12.sh
+## Setup Containerd
+containerd config default > /etc/containerd/config.toml
+systemctl restart containerd
 EOF
   }
 
