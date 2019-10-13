@@ -36,3 +36,33 @@ resource "aws_cloudwatch_log_group" "ecs_log_group" {
   # kms_key_id        = var.cluster_log_kms_key_id
   # tagAmazonECSTaskExecutionRolePolicys              = var.tags
 }
+
+resource "aws_security_group" "pod_default" {
+  name_prefix = "pod"
+  description = "Security Group for pods run in the Fargate provider"
+  vpc_id      = module.vpc.vpc_id
+}
+
+resource "aws_security_group_rule" "pod_ingress_internet" {
+  description       = "Allow pod access from the Internet."
+  protocol          = "tcp"
+  security_group_id = aws_security_group.pod_default.id
+  cidr_blocks       = ["0.0.0.0/0"]
+  from_port         = 0
+  to_port           = 65535
+  type              = "ingress"
+}
+
+resource "aws_security_group_rule" "pod_egress_internet" {
+  description       = "Allow pod access to the Internet."
+  protocol          = "-1"
+  security_group_id = aws_security_group.pod_default.id
+  cidr_blocks       = ["0.0.0.0/0"]
+  from_port         = 0
+  to_port           = 65535
+  type              = "egress"
+}
+
+output "pod_default_sg" {
+  value = aws_security_group.pod_default.id
+}
