@@ -100,7 +100,7 @@ sudo add-apt-repository -y "deb [arch=amd64] https://download.docker.com/linux/u
 sudo add-apt-repository -y ppa:longsleep/golang-backports
 ## Install Docker, Golang and kubectl
 sudo apt-get -y update
-sudo apt-get -y install docker-ce=5:18.09.9~3-0~ubuntu-bionic golang-1.12-go git kubectl
+sudo apt-get -y install docker-ce=5:18.09.9~3-0~ubuntu-bionic git kubectl golang
 ## Add ${var.system_user} to Docker group
 sudo usermod -aG docker ${var.system_user}
 ## Setup Golang Path
