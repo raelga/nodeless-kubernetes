@@ -98,7 +98,7 @@ echo "deb https://apt.kubernetes.io/ kubernetes-xenial main" >/etc/apt/sources.l
 ## Add Docker repo
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
 sudo apt-key fingerprint 0EBFCD88
-sudo add-apt-repository -y "deb [arch=amd64] https://download.docker.com/linux/ubuntu bionic stable"
+sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
 ## Add Golang repo
 sudo add-apt-repository -y ppa:longsleep/golang-backports
 ## Install Docker, Golang and kubectl
