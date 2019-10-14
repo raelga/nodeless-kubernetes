@@ -44,9 +44,26 @@ kind: Service
 metadata:
   name: nginx
 spec:
+  type: ClusterIP
   selector:
     app: nginx
   ports:
     - protocol: TCP
       port: 80
       targetPort: 80
+
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: nginx
+  annotations:
+    kubernetes.io/ingress.class: traefik
+spec:
+  rules:
+  - http:
+      paths:
+      - path: /
+        backend:
+          serviceName: nginx
+          servicePort: 80
