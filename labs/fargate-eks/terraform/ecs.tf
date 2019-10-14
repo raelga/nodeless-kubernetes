@@ -62,7 +62,3 @@ resource "aws_security_group_rule" "pod_egress_internet" {
   to_port           = 65535
   type              = "egress"
 }
-
-output "pod_default_sg" {
-  value = aws_security_group.pod_default.id
-}
