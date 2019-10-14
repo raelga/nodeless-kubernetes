@@ -24,25 +24,29 @@ module "master" {
   resource_group      = "${azurerm_resource_group.kubelet}"
   network             = "${module.net.network_id}"
   subnet              = "${module.net.compute_subnet_id}"
-  name                = "kubelet"
+  name                = "master"
   vm_size             = "Standard_F4s_v2"
   system_user         = "rael"
   github_user         = "raelga"
   tcp_allowed_ingress = [ 22, 6443 ]
 }
 
-# module "worker" {
-#   source              = "../../infra/tf/modules/azure/compute/virtual-machine"
-#   resource_group      = "${azurerm_resource_group.kubelet}"
-#   network             = "${module.net.network_id}"
-#   subnet              = "${module.net.compute_subnet_id}"
-#   name                = "kubelet"
-#   vm_size             = "Standard_F4s_v2"
-#   system_user         = "rael"
-#   github_user         = "raelga"
-#   tcp_allowed_ingress = [ 22, 80 ]
-# }
+module "worker" {
+  source              = "../../infra/tf/modules/azure/compute/virtual-machine"
+  resource_group      = "${azurerm_resource_group.kubelet}"
+  network             = "${module.net.network_id}"
+  subnet              = "${module.net.compute_subnet_id}"
+  name                = "woker"
+  vm_size             = "Standard_F4s_v2"
+  system_user         = "rael"
+  github_user         = "raelga"
+  tcp_allowed_ingress = [ 22, 80 ]
+}
 
 output "master_public_ip" {
   value = "${module.master.public_ip}"
+}
+
+output "worker_public_ip" {
+  value = "${module.worker.public_ip}"
 }
