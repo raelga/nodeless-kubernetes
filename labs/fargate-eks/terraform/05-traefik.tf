@@ -33,10 +33,17 @@ resource "aws_ecs_task_definition" "traefik" {
       "--api.insecure",
       "--accesslog",
       "--entrypoints.web.Address=:80",
-      "--providers.kubernetesingress=true",
-      "--providers.kubernetesingress.endpoint=${aws_eks_cluster.eks.endpoint}",
-      "--providers.kubernetesingress.certauthfilepath=/var/run/secrets/kubernetes.io/serviceaccount/ca.crt",
-      "--providers.kubernetesingress.token=eyJhbGciOiJSUzI1NiIsImtpZCI6IiJ9.eyJpc3MiOiJrdWJlcm5ldGVzL3NlcnZpY2VhY2NvdW50Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9uYW1lc3BhY2UiOiJkZWZhdWx0Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9zZWNyZXQubmFtZSI6InRyYWVmaWstaW5ncmVzcy1jb250cm9sbGVyLXRva2VuLXFmcGp2Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9zZXJ2aWNlLWFjY291bnQubmFtZSI6InRyYWVmaWstaW5ncmVzcy1jb250cm9sbGVyIiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9zZXJ2aWNlLWFjY291bnQudWlkIjoiYzhjNjMyYTgtZWRmOC0xMWU5LTg1M2ItMGEyZjRkMTJjOGNjIiwic3ViIjoic3lzdGVtOnNlcnZpY2VhY2NvdW50OmRlZmF1bHQ6dHJhZWZpay1pbmdyZXNzLWNvbnRyb2xsZXIifQ.V08U46zN2cJylZcsw3eeA9eWeQXxhtiXRbRR_1Y2UzjrRPg3lK9XKi0DcB-f0JT29WKvIJROu5jCUIa7DP-8QP-uP9VGPM61zg9I-wsmIYhxdDoHVKO_jhQuXs1LZ9mUizxYG7_653THdBpU8e8SaLki8XS1n8HeK1Sqt8tNZ_BbEffBoN7SNEBqczLY1GfOmL74iRcC8bBERcGWfHNt_bcw40wnmDbnyiHGLjbnxGELN8t0cHdJA58_GoAdVFZjyzHzFvkp9hFhnsC3z32xsWynlbf6OmvO23V81QCkOh8bL9WpnFerzg4jKNk25VZvbQw7BCwmH28SAuEp-1bGNA"
+      "--providers.kubernetesingress=true"
+    ],
+      "environment": [
+      {
+        "name": "KUBERNETES_SERVICE_HOST",
+        "value": "${replace(aws_eks_cluster.eks.endpoint, "https://", "")}"
+      },
+      {
+        "name": "KUBERNETES_SERVICE_PORT",
+        "value": "443"
+      }
     ],
     "logConfiguration": {
       "logDriver": "awslogs",
