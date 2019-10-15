@@ -87,7 +87,8 @@ resource "azurerm_virtual_machine" "main" {
 curl -sq https://github.com/${var.github_user}.keys | tee -a /home/${var.system_user}/.ssh/authorized_keys
 ## Setup some sane defaults
 echo -e 'set tabstop=2' | tee -a /home/${var.system_user}/.vimrc /root/.vimrc
-echo 'export PS1="\u@\h\n\w\n\$ "' | tee -a /home/${var.system_user}/.bashrc /root/.bashrc
+echo 'export PS1="\u@\h\n\w\n\$ "' | tee -a /home/${var.system_user}/.bashrc
+echo 'export PS1="\u@\h\n\w\n\# "' | tee -a /root/.bashrc
 # Base package installation
 sudo apt-get -y install apt-transport-https ca-certificates curl gnupg2 software-properties-common
 ## Add azure cli installation
