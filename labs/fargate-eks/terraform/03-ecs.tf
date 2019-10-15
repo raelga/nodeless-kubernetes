@@ -1,4 +1,4 @@
-locals {
+/* locals {
   ecs_cluster_name = "lab-ecs"
 }
 
@@ -61,4 +61,4 @@ resource "aws_security_group_rule" "pod_egress_internet" {
   from_port         = 0
   to_port           = 65535
   type              = "egress"
-}
+} */

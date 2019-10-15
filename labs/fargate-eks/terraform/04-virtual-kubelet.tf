@@ -1,4 +1,4 @@
-resource "aws_ecs_service" "virtual_kubelet" {
+/* resource "aws_ecs_service" "virtual_kubelet" {
   name            = "virtual-kubelet"
   cluster         = aws_ecs_cluster.fargate.id
   task_definition = aws_ecs_task_definition.virtual_kubelet.arn
@@ -122,3 +122,4 @@ EOF
 output virtual_kubelet_role_arn {
   value = aws_iam_role.virtual_kubelet.arn
 }
+ */

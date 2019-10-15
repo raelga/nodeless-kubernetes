@@ -1,4 +1,4 @@
-resource "aws_ecs_service" "traefik" {
+/* resource "aws_ecs_service" "traefik" {
   name            = "traefik"
   cluster         = aws_ecs_cluster.fargate.id
   task_definition = aws_ecs_task_definition.traefik.arn
@@ -83,3 +83,4 @@ resource "aws_security_group_rule" "traefik_egress_internet" {
   to_port           = 65535
   type              = "egress"
 }
+ */
