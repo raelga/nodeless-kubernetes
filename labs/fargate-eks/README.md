@@ -8,7 +8,7 @@ This lab is based on several resources you can find splitted into different dire
 
 ## Assumptions
 
-* You have AWS credentials either in your environemnt or in a shared credentials file
+* You have AWS credentials either in your environment or in a shared credentials file
 * You need to edit the terraform `provider.tf` file to either point to your own shared state or to use a local state file
 
 ## Create base resources
@@ -22,7 +22,7 @@ terraform apply -auto-approve
 This will create:
 
 * A simple VPC with 2 public subnets
-* An EKS cluster, which we will use as the control plane of our Nodeless Kubernetes Cluster, using the subnets of the VPC. EKS also requires a security group for the control plane and an IAM role to let EKS service to perform calls to AWS APIs on your behalf.
+* An EKS cluster, which we will use as the control plane of our Nodeless Kubernetes Cluster, using the subnets created in that VPC. EKS also requires a security group for the control plane and an IAM role to let EKS service to perform calls to several AWS APIs on your behalf.
 * A couple of ECR repositories that we will use later on. You could also use any other container registry, just take into account that you will need to update the references to the images in the lab's resources if you do so.
 
 Retrieve the cluster credentials using the AWS CLI: `aws eks update-kubeconfig --region eu-west-1 --name eks-lab`
